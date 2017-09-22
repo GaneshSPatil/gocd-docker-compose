@@ -9,7 +9,7 @@ services:
       - "./godata:/godata"
       - "./home-go:/home/go"
     environment:
-      - GO_SERVER_SYSTEM_PROPERTIES="-Dfoo=bar"
+      - GO_SERVER_SYSTEM_PROPERTIES="${GO_SERVER_SYSTEM_PROPERTIES}"
     deploy:
       replicas: 1
       restart_policy:
@@ -21,4 +21,10 @@ services:
       - gocd-server
     environment:
       - GO_SERVER_URL="https://gocd-server:8154/go"
+      - GO_AGENT_SYSTEM_PROPERTIES="${GO_AGENT_SYSTEM_PROPERTIES}"
+      - AGENT_AUTO_REGISTER_KEY="${AGENT_AUTO_REGISTER_KEY}"
+      - AGENT_AUTO_REGISTER_HOSTNAME="${AGENT_AUTO_REGISTER_HOSTNAME}"
+      - AGENT_AUTO_REGISTER_RESOURCES="${AGENT_AUTO_REGISTER_RESOURCES}"
+      - AGENT_AUTO_REGISTER_ENVIRONMENTS="${AGENT_AUTO_REGISTER_ENVIRONMENTS}"
+
 
