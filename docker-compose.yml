@@ -1,7 +1,7 @@
 version: "3"
 services:
   gocd-server:
-    image: gocd/gocd-server:v17.10.0
+    image: "gocd/gocd-server:${GOCD_VERSION}"
     ports:
       - "8153:8153"
       - "8154:8154"
@@ -16,12 +16,9 @@ services:
         condition: on-failure
   
   gocd-agent:
-    image: gocd/gocd-agent-alpine-3.5:v17.10.0
+    image: "${GOCD_AGENT_IMAGE}:${GOCD_VERSION}"
     links:
       - gocd-server
-    volumes:
-      - "./godata:/godata"
-      - "./home-go:/home/go"
     environment:
       - GO_SERVER_URL="https://gocd-server:8154/go"
 
