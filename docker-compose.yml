@@ -6,25 +6,26 @@ services:
       - "8153:8153"
       - "8154:8154"
     volumes:
-      - "./godata:/godata"
-      - "./home-go:/home/go"
+      - "${SERVER_GO_DATA_PATH}:/godata"
+      - "${SERVER_HOME_GO_PATH}:/home/go"
     environment:
       - GO_SERVER_SYSTEM_PROPERTIES="${GO_SERVER_SYSTEM_PROPERTIES}"
     deploy:
       replicas: 1
       restart_policy:
         condition: on-failure
-  
+
   gocd-agent:
     image: "${GOCD_AGENT_IMAGE}:${GOCD_VERSION}"
     links:
       - gocd-server
     environment:
       - GO_SERVER_URL="https://gocd-server:8154/go"
-      - GO_AGENT_SYSTEM_PROPERTIES="${GO_AGENT_SYSTEM_PROPERTIES}"
       - AGENT_AUTO_REGISTER_KEY="${AGENT_AUTO_REGISTER_KEY}"
       - AGENT_AUTO_REGISTER_HOSTNAME="${AGENT_AUTO_REGISTER_HOSTNAME}"
       - AGENT_AUTO_REGISTER_RESOURCES="${AGENT_AUTO_REGISTER_RESOURCES}"
       - AGENT_AUTO_REGISTER_ENVIRONMENTS="${AGENT_AUTO_REGISTER_ENVIRONMENTS}"
-
-
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
