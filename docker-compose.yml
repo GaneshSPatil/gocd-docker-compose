@@ -1,0 +1,27 @@
+version: "3"
+services:
+  gocd-server:
+    image: gocd/gocd-server:v17.10.0
+    ports:
+      - "8153:8153"
+      - "8154:8154"
+    volumes:
+      - "./godata:/godata"
+      - "./home-go:/home/go"
+    environment:
+      - GO_SERVER_SYSTEM_PROPERTIES="-Dfoo=bar"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+  
+  gocd-agent:
+    image: gocd/gocd-agent-alpine-3.5:v17.10.0
+    links:
+      - gocd-server
+    volumes:
+      - "./godata:/godata"
+      - "./home-go:/home/go"
+    environment:
+      - GO_SERVER_URL="https://gocd-server:8154/go"
+
