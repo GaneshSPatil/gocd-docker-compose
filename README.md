@@ -16,20 +16,22 @@ Above command will start a GoCD server and a GoCD agent with default configurati
 __Specify or override following variables in `.env` file.__
 
 #### GoCD Configurations
-Variable | Usage
---- | --- | ---
-*GOCD_VERSION* | Specify GoCD version to use. Defaults to `v17.10.0`.
+
+|Variable | Usage |
+|---------|-------|
+|*GOCD_VERSION* | Specify GoCD version to use. Defaults to `v17.10.0`. |
+
 
 #### GoCD Server Configurations
-Variable | Usage
---- | --- | ---
+|Variable | Usage |
+|---------|-------|
 *GO_SERVER_SYSTEM_PROPERTIES* | Specify GoCD server system properties.
 *SERVER_GO_DATA_PATH* | Specify volume mount location for `/godata`. The GoCD server will store all configuration, pipeline history database, artifacts, plugins, and logs into this mounted volume.
 *SERVER_HOME_GO_PATH* | Specify volume mount location for `/home/go`. Specifysecure credentials like SSH private keys and other things this mounted volume.
 
 #### GoCD Agent Configurations
-Variable | Usage
---- | --- | ---
+|Variable | Usage |
+|---------|-------|
 *GOCD_AGENT_IMAGE* | Specify GoCD agent image to use. Defaults to `gocd/gocd-agent-alpine-3.5`.
 *GO_AGENT_SYSTEM_PROPERTIES* | Specify GoCD agent system properties.
 *AGENT_AUTO_REGISTER_KEY* | Specify autoregister key for agent to be automatically approved by the server.
