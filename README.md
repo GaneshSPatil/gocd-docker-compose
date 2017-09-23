@@ -47,5 +47,5 @@ __Deploying services with multiple replicas is not yet supported in `docker comp
 To run multiple GoCD Agents specify replicas count and run docker compose on swarm cluster.__
 
 ```
- $(cat .env | grep ^[A-Z] | xargs) docker stack deploy --compose-file=docker-compose.yml couchbase
+export $(cat .env | xargs) && docker stack deploy --compose-file=docker-compose.yml couchbase
 ```
