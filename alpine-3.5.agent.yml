@@ -1,0 +1,11 @@
+version: "2.1"
+services:
+  gocd-agent-alpine-3.5:
+    image: "gocd/gocd-agent-alpine-3.5:${GOCD_VERSION}"
+    links:
+      - gocd-server
+    environment:
+      - GO_SERVER_URL="https://gocd-server:8154/go"
+    env_file:
+      - .env
+      - env/gocd-agent-alpine-3.5.env

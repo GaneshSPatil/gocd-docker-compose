@@ -1,0 +1,55 @@
+version: "2.1"
+services:
+  gocd-server:
+    image: "gocd/gocd-server:${GOCD_VERSION}"
+    ports:
+      - "8153:8153"
+      - "8154:8154"
+    volumes:
+      - "${SERVER_GO_DATA_PATH}:/godata"
+      - "${SERVER_HOME_GO_PATH}:/home/go"
+    environment:
+      - GO_SERVER_SYSTEM_PROPERTIES="${GO_SERVER_SYSTEM_PROPERTIES}"
+
+
+  # ubuntu-14.04-gocd-agent:
+  #   image: "gocd/gocd-agent-ubuntu-14.04:${GOCD_VERSION}"
+  #   links:
+  #     - gocd-server
+  #   extends:
+  #     file: base.agent.yml
+  #     service: gocd-agent
+  #
+  # ubuntu-16.04-gocd-agent:
+  #   image: "gocd/gocd-agent-ubuntu-16.04:${GOCD_VERSION}"
+  #   links:
+  #     - gocd-server
+  #   extends:
+  #     file: base.agent.yml
+  #     service: gocd-agent
+  #
+  # centos-6-gocd-agent:
+  #   image: "gocd/gocd-agent-centos-6:${GOCD_VERSION}"
+  #   links:
+  #     - gocd-server
+  #   extends:
+  #     file: base.agent.yml
+  #     service: gocd-agent
+  #
+  # centos-7-gocd-agent:
+  #   image: "gocd/gocd-agent-centos-7:${GOCD_VERSION}"
+  #   links:
+  #     - gocd-server
+  #   extends:
+  #     file: base.agent.yml
+  #     service: gocd-agent
+  #   environment:
+  #
+  #
+  # debian-8-gocd-agent:
+  #   image: "gocd/gocd-agent-debian-8:${GOCD_VERSION}"
+  #   links:
+  #     - gocd-server
+  #   extends:
+  #     file: base.agent.yml
+  #     service: gocd-agent
