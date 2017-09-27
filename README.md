@@ -2,15 +2,45 @@
 
 Run an Alpine Linux based docker GoCD server and multiple GoCD Agents using GoCD Docker Compose.
 
-
 ### Usage:
 
-Run GoCD app with Compose:
+#### GoCD Server
+Run GoCD server standalone app with Compose:
 ```
-docker-compose up
+docker-compose -f server.yml up
 ```
+Above command will start a GoCD server.
 
-Above command will start a GoCD server and a GoCD agent with default configuration.
+#### GoCD Server and Alpine-3.5 GoCD Agent
+
+Run GoCD server and Alpine-3.5 GoCD agent with Compose:
+```
+docker-compose -f server.yml -f agent/alpine-3.5.yml up
+```
+Above command will start a GoCD server and an Alpine-3.5 GoCD agent with default configuration.
+
+#### Available GoCD Agent Os flavours:
+* Alpine-3.5 GoCD Agent
+* Ubuntu-12.04 GoCD Agent
+* Ubuntu-14.04 GoCD Agent
+* Ubuntu-16.04 GoCD Agent
+
+#### Running multiple GoCD Agents
+
+Run GoCD server, an Alpine-3.5 GoCD agent and ubuntu-12.04 GoCD Agent with Compose:
+```
+docker-compose -f server.yml -f agent/alpine-3.5.yml -f agent/ubuntu-12.04.yml up
+```
+Above command will start a GoCD server, an Alpine-3.5 GoCD agent and an Ubuntu-12.04 GoCD Agent with default configuration.
+
+#### Running multiple instances of GoCD Agent of specific OS flavour.
+
+Run GoCD server and an 2 instances Alpine-3.5 GoCD agent with Compose:
+```
+docker-compose -f server.yml -f agent/alpine-3.5.yml up --scale gocd-agent-alpine-3.5=2
+```
+Above command will start a GoCD server, two Alpine-3.5 GoCD agents with default configuration.
+
 
 ### Available configuration options
 __Specify or override following variables in `.env` file.__
@@ -40,12 +70,5 @@ __Specify or override following variables in `.env` file.__
 *AGENT_AUTO_REGISTER_HOSTNAME* | Specify the name of the agent when it is registered with the server
 
 
----
-
-## NOTE:
-__Deploying services with multiple replicas is not yet supported in `docker compose`.
-To run multiple GoCD Agents specify replicas count and run docker compose on swarm cluster.__
-
-```
-export $(cat .env | xargs) && docker stack deploy --compose-file=docker-compose.yml couchbase
-```
+#### Override OS specific GoCD Agent Configurations
+One can Override agent Configuration specified in `.env` file by redefining the Configuration variables under `env/gocd-agent${OS_TYPE}.env`
