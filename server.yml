@@ -3,8 +3,8 @@ services:
   gocd-server:
     image: "gocd/gocd-server:${GOCD_VERSION}"
     ports:
-      - "8153:8153"
-      - "8154:8154"
+      - "${GO_SERVER_HTTP_PORT}:8153"
+      - "${GO_SERVER_HTTPS_PORT}:8154"
     volumes:
       - "${SERVER_GO_DATA_PATH}:/godata"
       - "${SERVER_HOME_GO_PATH}:/home/go"

@@ -55,6 +55,8 @@ __Specify or override following variables in `.env` file.__
 ### GoCD Server Configurations
 |Variable | Usage |
 |---------|-------|
+*GO_SERVER_HTTP_PORT* | Specify GoCD server HTTP port.
+*GO_SERVER_HTTPS_PORT* | Specify GoCD server HTTPS port.
 *GO_SERVER_SYSTEM_PROPERTIES* | Specify GoCD server system properties.
 *SERVER_GO_DATA_PATH* | Specify volume mount location for `/godata`. The GoCD server will store all configuration, pipeline history database, artifacts, plugins, and logs into this mounted volume.
 *SERVER_HOME_GO_PATH* | Specify volume mount location for `/home/go`. Specifysecure credentials like SSH private keys and other things this mounted volume.
