@@ -62,7 +62,6 @@ __Specify or override following variables in `.env` file.__
 #### GoCD Agent Configurations
 |Variable | Usage |
 |---------|-------|
-*GOCD_AGENT_IMAGE* | Specify GoCD agent image to use. Defaults to `gocd/gocd-agent-alpine-3.5`.
 *GO_AGENT_SYSTEM_PROPERTIES* | Specify GoCD agent system properties.
 *AGENT_AUTO_REGISTER_KEY* | Specify autoregister key for agent to be automatically approved by the server.
 *AGENT_AUTO_REGISTER_RESOURCES* | Specify comma separated list of resources that the agent should be associated with.
