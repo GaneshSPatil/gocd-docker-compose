@@ -1,0 +1,11 @@
+version: "2.1"
+services:
+  gocd-agent-ubuntu-16.04:
+    image: "gocd/gocd-agent-ubuntu-16.04:${GOCD_VERSION}"
+    links:
+      - gocd-server
+    environment:
+      - GO_SERVER_URL="https://gocd-server:8154/go"
+    env_file:
+      - .env
+      - env/gocd-agent-ubuntu-16.04.env
