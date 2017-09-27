@@ -11,15 +11,6 @@ services:
     environment:
       - GO_SERVER_SYSTEM_PROPERTIES="${GO_SERVER_SYSTEM_PROPERTIES}"
 
-
-  # ubuntu-14.04-gocd-agent:
-  #   image: "gocd/gocd-agent-ubuntu-14.04:${GOCD_VERSION}"
-  #   links:
-  #     - gocd-server
-  #   extends:
-  #     file: base.agent.yml
-  #     service: gocd-agent
-  #
   # ubuntu-16.04-gocd-agent:
   #   image: "gocd/gocd-agent-ubuntu-16.04:${GOCD_VERSION}"
   #   links:
