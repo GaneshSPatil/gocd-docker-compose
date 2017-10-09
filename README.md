@@ -13,34 +13,31 @@ Above command will start a GoCD server.
 
 ### GoCD Server and Alpine-3.5 GoCD Agent
 
-Run GoCD server and Alpine-3.5 GoCD agent with Compose:
+Run GoCD server and a GoCD agent with Compose:
 ```
-docker-compose -f server.yml -f agent/alpine-3.5.yml up
+docker-compose -f server.yml -f agent/build.agent.yml up
 ```
-Above command will start a GoCD server and an Alpine-3.5 GoCD agent with default configuration.
+Above command will start a GoCD server and a GoCD `build_agent` agent with default configuration.
 
-### Available GoCD Agent Os flavours:
-* Alpine-3.5 GoCD Agent
-* Ubuntu-12.04 GoCD Agent
-* Ubuntu-14.04 GoCD Agent
-* Ubuntu-16.04 GoCD Agent
+> **Note:** Specify `GOCD_AGENT_IMAGE_REPOSITORY` under `env/build.agent.env` to specify GoCD agent image for `build_agent`. Or override the value under `.env`  for all the agents!
 
 ### Running multiple GoCD Agents
 
-Run GoCD server, an Alpine-3.5 GoCD agent and ubuntu-12.04 GoCD Agent with Compose:
-```
-docker-compose -f server.yml -f agent/alpine-3.5.yml -f agent/ubuntu-12.04.yml up
-```
-Above command will start a GoCD server, an Alpine-3.5 GoCD agent and an Ubuntu-12.04 GoCD Agent with default configuration.
+Copy `agent/build.agent.yml` and `env/build.agent.env` and create another agent configuration (say `prod.agent.yml` and `prod.agent.env`)!
 
-### Running multiple instances of GoCD Agent of specific OS flavour.
-
-Run GoCD server and an 2 instances Alpine-3.5 GoCD agent with Compose:
+Run GoCD server, a build and a prod GoCD Agent with Compose:
 ```
-docker-compose -f server.yml -f agent/alpine-3.5.yml up --scale gocd-agent-alpine-3.5=2
+docker-compose -f server.yml -f agent/build.agent.yml -f agent/prod.agent.yml up
 ```
-Above command will start a GoCD server, two Alpine-3.5 GoCD agents with default configuration.
+Above command will start a GoCD server, a GoCD `build_agent` and a `prod_agent` with default configuration.
 
+### Running multiple instances of GoCD Agent.
+
+Run GoCD server and an 2 instances GoCD `build_agent` with Compose:
+```
+docker-compose -f server.yml -f agent/build.agent.yml up --scale build_agent=2
+```
+Above command will start a GoCD server, two GoCD `build_agent`s with default configuration.
 
 ## Available configuration options
 __Specify or override following variables in `.env` file.__
@@ -64,6 +61,7 @@ __Specify or override following variables in `.env` file.__
 ### GoCD Agent Configurations
 |Variable | Usage |
 |---------|-------|
+*GOCD_AGENT_IMAGE_REPOSITORY* | Specify GoCD agent image repository name.
 *GO_AGENT_SYSTEM_PROPERTIES* | Specify GoCD agent system properties.
 *AGENT_AUTO_REGISTER_KEY* | Specify autoregister key for agent to be automatically approved by the server.
 *AGENT_AUTO_REGISTER_RESOURCES* | Specify comma separated list of resources that the agent should be associated with.
@@ -71,5 +69,5 @@ __Specify or override following variables in `.env` file.__
 *AGENT_AUTO_REGISTER_HOSTNAME* | Specify the name of the agent when it is registered with the server
 
 
-### Override OS specific GoCD Agent Configurations
-One can Override agent Configuration specified in `.env` file by redefining the Configuration variables under `env/gocd-agent${OS_TYPE}.env`
+### Override GoCD Agent Configurations
+One can Override agent Configuration specified globally in `.env` file by redefining the Configuration variables under `env/${AGNET_NAME}.agent.env`
