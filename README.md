@@ -86,3 +86,4 @@ One can Override agent Configuration specified globally in `.env` file by redefi
      - `AGENT_GO_DATA_PATH`
      - `AGENT_HOME_GO_PATH`
   2. Specify `volumes` for `${AGENT_NAME}_agent` service under `docker-compose.override.yml`.
+> **WARNING**: Volume mounts for Agents are not supported for multiple agent instances (with `--scale` option).
