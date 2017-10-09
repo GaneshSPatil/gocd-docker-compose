@@ -1,11 +1,11 @@
 version: "2.1"
 services:
-  gocd-agent-ubuntu-12.04:
-    image: "gocd/gocd-agent-ubuntu-12.04:${GOCD_VERSION}"
+  gocd-agent-alpine-3.5:
+    image: "${GOCD_AGENT_IMAGE_REPOSITORY}:${GOCD_VERSION}"
     links:
       - gocd-server
     environment:
       - GO_SERVER_URL="https://gocd-server:${GO_SERVER_HTTPS_PORT}/go"
     env_file:
       - .env
-      - env/gocd-agent-ubuntu-12.04.env
+      - env/build.agent.env
