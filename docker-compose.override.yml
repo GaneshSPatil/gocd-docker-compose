@@ -1,0 +1,9 @@
+gocd-server:
+  # volumes:
+  #   - "${SERVER_GO_DATA_PATH}:/godata"
+  #   - "${SERVER_HOME_GO_PATH}:/home/go"
+
+build_agent:
+  # volumes:
+  #   - "${SERVER_GO_DATA_PATH}:/godata"
+  #   - "${SERVER_HOME_GO_PATH}:/home/go"
