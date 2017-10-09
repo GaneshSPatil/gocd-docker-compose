@@ -56,7 +56,7 @@ __Specify or override following variables in `.env` file.__
 *GO_SERVER_HTTPS_PORT* | Specify GoCD server HTTPS port. Defaults to `8154`.
 *GO_SERVER_SYSTEM_PROPERTIES* | Specify GoCD server system properties.
 *SERVER_GO_DATA_PATH* | Specify volume mount location for `/godata`. The GoCD server will store all configuration, pipeline history database, artifacts, plugins, and logs into this mounted volume.
-*SERVER_HOME_GO_PATH* | Specify volume mount location for `/home/go`. Specifysecure credentials like SSH private keys and other things this mounted volume.
+*SERVER_HOME_GO_PATH* | Specify volume mount location for `/home/go`. Specify secure credentials like SSH private keys and other things this mounted volume.
 
 ### GoCD Agent Configurations
 |Variable | Usage |
@@ -67,7 +67,22 @@ __Specify or override following variables in `.env` file.__
 *AGENT_AUTO_REGISTER_RESOURCES* | Specify comma separated list of resources that the agent should be associated with.
 *AGENT_AUTO_REGISTER_ENVIRONMENTS* | Specify comma separated list of environments that the agent should be associated with.
 *AGENT_AUTO_REGISTER_HOSTNAME* | Specify the name of the agent when it is registered with the server
+*AGENT_GO_DATA_PATH* | Specify volume mount location for `/godata`. The GoCD agent will store all configuration and logs into this mounted volume.
+*AGENT_HOME_GO_PATH* | Specify volume mount location for `/home/go`. Specify secure credentials like SSH private keys and other things this mounted volume.
 
 
 ### Override GoCD Agent Configurations
 One can Override agent Configuration specified globally in `.env` file by redefining the Configuration variables under `env/${AGNET_NAME}.agent.env`
+
+### Volume Mounts
+* Steps to specify volume mounts for GoCD server:
+  1. Specify following volume mount variables under `.env`.
+     - `SERVER_GO_DATA_PATH`
+     - `SERVER_HOME_GO_PATH`
+  2. Specify `volumes` for `gocd_server` service under `docker-compose.override.yml`.
+
+* Steps to specify volume mounts for GoCD agent:
+  1. Specify following volume mount variables under `.env` or specific `env/${AGNET_NAME}.agent.env`.
+     - `AGENT_GO_DATA_PATH`
+     - `AGENT_HOME_GO_PATH`
+  2. Specify `volumes` for `${AGENT_NAME}_agent` service under `docker-compose.override.yml`.
